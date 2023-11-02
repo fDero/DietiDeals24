@@ -1,20 +1,21 @@
 import { Component } from 'react';
-import Input from './Input';
+import Form from './Form';
 
 export default class FormRegistrazione extends Component {
 	render() {
 		return (
-			<form action={this.props.addr} method="post" id={this.props.id}>
-				<Input name="name" type="text" />
-				<Input name="surname" type="text" />
-				<Input name="birthday" type="date" />
-				<Input name="country" type="text" />
-				<Input name="email" type="email" />
-				<Input name="password" type="password" />
-				<Input name="phone" type="tel" />
-				<button type="submit">Submit</button>
-				<button type="reset">Reset</button>
-			</form>
+			<Form
+				inputs={[
+					{ name: 'name', type: 'text' },
+					{ name: 'surname', type: 'text' },
+					{ name: 'birthday', type: 'date' },
+					{ name: 'country', type: 'text' },
+					{ name: 'email', type: 'email' },
+					{ name: 'password', type: 'password' },
+					{ name: 'phone', type: 'tel' },
+				]}
+				handleSubmit={this.props.handleSubmit}
+			/>
 		);
 	}
 }

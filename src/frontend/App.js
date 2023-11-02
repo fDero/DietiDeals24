@@ -1,50 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import { Component } from 'react';
-import FormRegistrazione from './src/FormRegistrazione';
-import FormLogin from './src/FormLogin';
+import FormRegistrazione from './components/FormRegistrazione';
+import FormLogin from './components/FormLogin';
 
-
-function request(endpoint, method, data){
+function request(endpoint, method, data) {
 	let request = {
 		method: method,
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(data),
-	}
+	};
 	fetch('http://localhost:8080/' + endpoint, request)
-	.then(response => response.text())
-  	.then(data => { console.log(data); })
-  	.catch(error => { console.error('Si è verificato un errore:', error) });
+		.then(response => response.text())
+		.then(data => {
+			console.log(data);
+		})
+		.catch(error => {
+			console.error('Si è verificato un errore:', error);
+		});
 }
 
-
-
 export default class App extends Component {
-	
-	constructor(props){
+	constructor(props) {
 		super(props);
-		this.state = { };
+		this.state = {
+			form: (
+				<FormRegistrazione
+					id="form"
+					addr={this.addr}
+					handleSubmit={this.handleFormSubmit}
+				/>
+			),
+		};
 	}
-	
+
 	render = () => (
 		<View style={this.styles.container}>
-			<FormRegistrazione id="form" addr={this.addr} />
-			<button onClick={this.button_clicked}> Registrati </button>
+			{this.state.form}
+			<button onClick={this.setForm.bind(this)}> Registrati </button>
 			<StatusBar style="auto" />
 		</View>
 	);
 
-	button_clicked = () => {
-		console.log("button clicked")
-		request('register/initialize_registration','POST',{
-			name: "Nome",
-    		surname: "Cognome",
-    		birthday: "1990-01-01",
-    		country: "IT", 
-    		password: "Password123?",
-    		email: "francescodero@outlook.net",
-    		phone: "123456789",
-		})
+	setForm() {
+		this.setState({ form: <FormLogin id="form" addr={this.addr} /> });
+	}
+
+	handleFormSubmit(submittedData) {
+		request('register/initialize_registration', 'POST', submittedData);
 	}
 
 	styles = StyleSheet.create({
