@@ -1,6 +1,15 @@
 import { Component } from 'react';
 
 export default class Input extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { value: this.props.defaultValue || '' };
+	}
+
+	onChange(event) {
+		this.setState({ value: event.target.value });
+	}
+
 	render() {
 		return (
 			<div>
@@ -8,7 +17,8 @@ export default class Input extends Component {
 				<input
 					type={this.props.type}
 					name={this.props.name}
-					defaultValue={this.props.defaultValue || ''}
+					value={this.state.value}
+					onChange={this.onChange}
 				></input>
 			</div>
 		);
