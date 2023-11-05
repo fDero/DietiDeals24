@@ -1,34 +1,37 @@
-import React from 'react';
-import TextFieldInput from './TextFieldInput.tsx';
-import ActionButton from './ActionButton.tsx';
+import React from 'react'
+import TextFieldInput from './TextFieldInput.tsx'
 
-interface Props {}
+interface Props {
+	submit_action: (state : State) => void
+	forgot_password_action: (state : State) => void
+}
 
-interface State {
-	usernameValue: string;
-	passwordValue: string;
+export interface State {
+	usernameValue: string
+	passwordValue: string
 }
 
 export default class LoginForm extends React.Component<Props, State> {
+	
 	constructor(props: Props) {
-		super(props);
+		super(props)
 		this.state = {
 			usernameValue: '',
-			passwordValue: '',
-		};
+			passwordValue: ''
+		}
 	}
 
 	username_field_props = {
-		name: 'username',
+		name: 'email',
 		type: 'text',
-		autoComplete: 'username',
-		placeholder: 'username',
+		autoComplete: 'email',
+		placeholder: 'email',
 		update: (new_username_value: string) => {
 			this.setState({
-				usernameValue: new_username_value,
-			});
-		},
-	};
+				usernameValue: new_username_value
+			})
+		}
+	}
 
 	password_field_props = {
 		name: 'password',
@@ -38,16 +41,22 @@ export default class LoginForm extends React.Component<Props, State> {
 		update: (new_password_value: string) => {
 			this.setState({
 				passwordValue: new_password_value,
-			});
-		},
-	};
+			})
+		}
+	}
 
 	render = () => (
 		<div>
 			<form>
-				<TextFieldInput {...this.username_field_props} />
-				<TextFieldInput {...this.password_field_props} />
+				<div className='mb-3'>
+					<TextFieldInput {...this.username_field_props} />
+				</div>
+				<div className='mb-3'>					
+					<TextFieldInput {...this.password_field_props} />
+				</div>
 			</form>
+			<button onClick={() => {this.props.submit_action(this.state)}} className="btn btn-primary w-100 mt-1 mb-1"> LOGIN </button>
+			<button onClick={() => {this.props.forgot_password_action(this.state)}} className="btn btn-primary w-100 mt-1 mb-1"> forgot password? </button>
 		</div>
-	);
+	)
 }
