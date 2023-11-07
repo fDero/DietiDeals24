@@ -24,8 +24,13 @@ class LoginPage extends React.Component<Props, State> {
 		onFailure: (() => {}),
 		cookiePolicy: 'single_host_origin',
 		render: (renderProps : any) => (
-			<button onClick={renderProps.onClick} disabled={false} className="btn btn-danger w-100 mt-1"> 
-				LOGIN WITH GOOGLE
+			<button onClick={renderProps.onClick} disabled={false} className="btn btn-google w-100 mt-1"> 
+				<i className='justify-content-center align-items-center'>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 100 120">
+    					<image href="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="100" height="100"/>
+  					</svg>
+				</i>
+				<b>LOGIN WITH GOOGLE</b>
 			</button>
 		)
 	}
@@ -45,10 +50,13 @@ class LoginPage extends React.Component<Props, State> {
 	render = () => (
 		<div className="d-flex justify-content-center align-items-center vh-100">
 			<div className='card shadow' style={{width: '24rem' }}>
-				<div className='card-body'>
-					{/*-- LOGO --*/}
+				<div className='card-img d-flex justify-content-center align-items-center'>
+					<img src="logo.svg" alt="DietiDeals24-LOGO" width="300rem"/>
+				</div>
+				<div className='card-body '>
 					<LoginForm submit_action={this.submit_action} forgot_password_action={this.forgot_password_action} />
 					<GoogleLogin {...this.google_button_props} />
+					<button  className="link_button w-100 mt-2"> you have no account? </button>
 				</div>
 			</div>
 		</div>
