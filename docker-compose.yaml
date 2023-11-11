@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+
+#  frontend:
+#    image: node:latest
+#    command: sh -c "npm run dev"
+#    volumes: 
+#      - "./frontend/:/frontend"
+#    working_dir: "/frontend"
+
+  backend:
+    image: amazoncorretto:21
+    command: sh -c "java -jar DietiDeals24-backend-0.0.1-SNAPSHOT.jar"
+    volumes:
+      - './backend/target:/jarfiles'
+    working_dir: "/jarfiles"
+    depends_on:
+      - database
+      - cache
+
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: milleteschi
+      POSTGRES_DB: dietideals24
+    volumes:
+      -  ./database/scheme.sql:/docker-entrypoint-initdb.d/init.sql
+    command: ["postgres", "-p", "5433"]
+      
+  cache:
+    image: redis:latest
