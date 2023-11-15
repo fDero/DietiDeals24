@@ -2,12 +2,18 @@ version: '3.3'
 
 services:
 
-#  frontend:
-#    image: node:latest
-#    command: sh -c "npm run dev"
-#    volumes: 
-#      - "./frontend/:/frontend"
-#    working_dir: "/frontend"
+  frontend:
+    image: node:20.9.0
+    volumes:
+      - './frontend:/usr'
+    command: >
+      sh -c "
+        npm install && 
+        npm run build && 
+        npm start
+      "
+    depends_on:
+      - backend
 
   backend:
     image: amazoncorretto:21
