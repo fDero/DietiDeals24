@@ -15,23 +15,23 @@ export class LabledFormInputComponent {
 	@Input() public type  !: string
 	@Input() public value ?: string
 
-	get_value() : string {
+	getValue() : string {
 		return this.value || ''
 	}
 
-	get_label() : string {
+	getLabel() : string {
 		return this.label.toUpperCase()
 	}
 
-	get_type() : string {
+	getType() : string {
 		return this.type.toLocaleLowerCase()
 	}
 
-	get_placeholder() : string {
+	getPlaceHolder() : string {
 		return this.label.toLocaleLowerCase()
 	}
 
-	get_autocomplete() : string {
+	getAutoComplete() : string {
 		const autocompletes : {[key: string]: string} = {
 			'name' : 'name',
 			'surname' : 'name',
