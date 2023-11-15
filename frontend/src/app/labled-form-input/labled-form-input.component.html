@@ -1,0 +1,11 @@
+<div class="dietideals24-labled-form-field-wrapper">
+    <h4 class="dietideals24-labled-form-field-label"> {{ get_label() }} </h4>
+    <input 
+        [(ngModel)]="value" 
+        [attr.value]="get_value()"
+        [attr.placeholder]="get_placeholder()" 
+        [attr.type]="get_type()" 
+        [attr.autocomplete]="get_autocomplete()" 
+        class="form-control" 
+    />
+</div>
